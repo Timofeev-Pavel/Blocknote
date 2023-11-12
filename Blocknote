@@ -1,0 +1,62 @@
+#include <iostream>
+#include <time.h>
+#include <string.h>
+using namespace std;
+struct NOTE
+    {
+    char NAME[100];   //first name + surname
+    long long int TELE; //phone number
+    char BDAY[100]; //date of birthday
+    };
+void ShowNote(NOTE note){
+    cout<<"Persons' full name: "<<note.NAME<<endl;
+    cout<<"Persons' phone number: "<<note.TELE<<endl;
+    cout<<"Persons' date of birthday: "<<note.BDAY<<endl;
+    cout<<"**********************************************"<<endl;
+    }
+NOTE NPers(){
+    NOTE block;
+    cin.get();
+    cout<<"Persons' full name: ";
+    cin.getline(block.NAME, 150);
+    cout<<"Persons' date of birthday: ";
+    cin.getline(block.BDAY, 150);
+    cout<<"Persons' phone number: ";
+    cin>>block.TELE;
+    return block;
+}
+int main() {
+    NOTE pers1 {"Antony Woolfram", 87342164401, "30.10.1991"};
+    NOTE pers2 {"Brad Morthes", 89137778099, "09.04.2000"};
+    NOTE BLOCKNOTE[8] = {pers1, pers2};
+    int count = 2;
+    int choise;
+    bool x = false;
+    while(true){
+    cout<<"\nMorning, select an action:"<<endl;
+    cout<<"1. Show all info"<<endl;
+    cout<<"2. Add person to blocknote"<<endl;
+    cout<<"3. Search person by phone number"<<endl;
+    cin>>choise;
+        switch(choise)
+        {
+            case 1:{for (int i =0; i<count; i++) ShowNote(BLOCKNOTE[i]); break;}
+            case 2:{BLOCKNOTE[count] = NPers(); count+=1; break;}
+            case 3:{
+                                    cout<<"Enter persons phone number"<<endl;
+                                    long long int num;
+                                    cin.get();
+                                    cin>>num;
+                                    for (int i = 0; i<count; i++)
+                                        {
+                                            if (num == BLOCKNOTE[i].TELE){
+                                                ShowNote(BLOCKNOTE[i]);
+                                                x = true;}
+                                        }
+                                    if (x == false)
+                                        cout<<"There is no person with such a phone number"<<endl;
+                                    break;
+                    }
+        }
+                }
+}
